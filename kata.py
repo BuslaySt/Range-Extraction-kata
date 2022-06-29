@@ -11,14 +11,23 @@
 
 def solution(args):
     result = str(args[0])
+    last = args[0]
     prev = args[0]
     for number in args[1:]:
-        if number-prev == 1:
-            prev = number
-        elif number-prev > 1:
-            result += '-'+str(prev)+','
-            prev = number
+        if number-prev > 1:
+            if prev-last == 1:
+                result += ','+str(prev)+','+str(number)
+            else:
+                result += '-'+str(prev)+','+str(number)
+            last = number
+        prev = number
+    if prev-last == 1:
+        result += ','+str(args[-1])
+    else:
+        result += '-'+str(args[-1])
+
     return result
 
-exam = solution([0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20])
+exam = solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20])
+answer = "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
 print(exam)
