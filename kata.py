@@ -15,10 +15,13 @@ def solution(args):
     prev = args[0]
     for number in args[1:]:
         if number-prev > 1:
-            if prev-last == 1:
-                result += ','+str(prev)+','+str(number)
+            if last == prev:
+                result += ','+str(number)
             else:
-                result += '-'+str(prev)+','+str(number)
+                if prev - last > 1:
+                    result += '-'+str(prev)+','+str(number)
+                else:
+                    result += ','+str(prev)+','+str(number)
             last = number
         prev = number
     if prev-last == 1:
